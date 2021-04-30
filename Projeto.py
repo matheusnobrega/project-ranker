@@ -14,6 +14,11 @@ class Projeto:
         self.criterio_custo = criterio_custo
         self.criterio_esforco = criterio_esforco
 
+    def __str__(self):
+        return f'O projeto {self.nome} tem inicio no dia {self.data_inicio} ' \
+               f'e término no dia {self.data_termino} com {self.qtd_pessoas_alocadas}' \
+               f' pessoas alocadas'
+
     def calcula_nota(self):
         nota = (self.criterio_custo + self.criterio_valor + \
                self.criterio_esforco + self.criterio_impacto)*100/20
@@ -21,8 +26,6 @@ class Projeto:
         self.nota = nota
         print(nota)
 
-projeto = Projeto('Projeto1', 'Descrição', 'Segec', '12/07/2021', '12/08/2021',
-                  21, 5, 5, 5, 5)
-projeto.calcula_nota()
+
 
 

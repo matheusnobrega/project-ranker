@@ -1,5 +1,6 @@
 class Projeto:
 
+    projetos = []
     def __init__(self, nome, descricao, unidade_responsavel, data_inicio,
                  data_termino, qtd_pessoas_alocadas, criterio_impacto, criterio_valor,
                  criterio_custo, criterio_esforco):
@@ -13,6 +14,7 @@ class Projeto:
         self.criterio_valor = criterio_valor
         self.criterio_custo = criterio_custo
         self.criterio_esforco = criterio_esforco
+        self.__class__.projetos.append(self)
 
     def __str__(self):
         return f'O projeto {self.nome} tem inicio no dia {self.data_inicio} ' \
@@ -22,9 +24,16 @@ class Projeto:
     def calcula_nota(self):
         nota = (self.criterio_custo + self.criterio_valor + \
                self.criterio_esforco + self.criterio_impacto)*100/20
-
         self.nota = nota
         print(nota)
+
+#    def gera_ranking(self):
+#        print(self.unidade_responsavel.qtd_pessoas_alocadas)
+
+    @classmethod
+    def gera_ranking(cls):
+        for projeto in cls.projetos:
+            print(projeto)
 
 
 

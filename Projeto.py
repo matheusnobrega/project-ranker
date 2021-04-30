@@ -14,7 +14,7 @@ class Projeto:
         self.criterio_custo = criterio_custo
         self.criterio_esforco = criterio_esforco
 
-    def gera_nota(self):
+    def calcula_nota(self):
         nota = (self.criterio_custo + self.criterio_valor + \
                self.criterio_esforco + self.criterio_impacto)*100/20
 
@@ -23,6 +23,6 @@ class Projeto:
 
 projeto = Projeto('Projeto1', 'Descrição', 'Segec', '12/07/2021', '12/08/2021',
                   21, 5, 5, 5, 5)
-projeto.gera_nota()
+projeto.calcula_nota()
 
 

@@ -14,6 +14,10 @@ class Unidade:
     def sigla(self):
         return self._sigla
 
+    @sigla.setter
+    def sigla(self, sigla):
+        self._sigla = sigla
+
     @property
     def qtd_pessoas_alocadas(self):
         return self._qtd_pessoas_alocadas

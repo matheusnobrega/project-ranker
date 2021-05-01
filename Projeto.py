@@ -22,9 +22,15 @@ class Projeto:
                f'e término no dia {self.data_termino} com {self.qtd_pessoas_alocadas}' \
                f' pessoas alocadas'
 
+    @property
+    def situacao(self):
+        return self._situacao
 
-    def set_situacao(self, situacao):
-        self.situacao = situacao
+    @situacao.setter
+    def situacao(self, situacao):
+        self._situacao = situacao
+
+
 
     def calcula_nota(self):
         nota = (self.criterio_custo + self.criterio_valor + \
@@ -50,8 +56,10 @@ class Projeto:
         for projeto in cls.projetos:
             qtd_pessoas_unidade = qtd_pessoas_unidade - projeto.qtd_pessoas_alocadas
             if qtd_pessoas_unidade >= 0:
-                print('Priorizado')
+                print("Priorizado")
+                projeto.situacao = 'Priorizado'
             else:
+                projeto.situacao = 'Nao priorizado'
                 print("Nao priorizado")
 
             print(projeto.nota)

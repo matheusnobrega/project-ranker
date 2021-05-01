@@ -14,12 +14,17 @@ class Projeto:
         self.criterio_valor = criterio_valor
         self.criterio_custo = criterio_custo
         self.criterio_esforco = criterio_esforco
+        self.situacao = 'Aguardando priorização'
         self.__class__.projetos.append(self)
 
     def __str__(self):
         return f'O projeto {self.nome} tem inicio no dia {self.data_inicio} ' \
                f'e término no dia {self.data_termino} com {self.qtd_pessoas_alocadas}' \
                f' pessoas alocadas'
+
+
+    def set_situacao(self, situacao):
+        self.situacao = situacao
 
     def calcula_nota(self):
         nota = (self.criterio_custo + self.criterio_valor + \
@@ -41,7 +46,14 @@ class Projeto:
 
             cls.projetos[p].nota = atual
 
+        qtd_pessoas_unidade = cls.projetos[0].unidade_responsavel.qtd_pessoas_alocadas
         for projeto in cls.projetos:
+            qtd_pessoas_unidade = qtd_pessoas_unidade - projeto.qtd_pessoas_alocadas
+            if qtd_pessoas_unidade >= 0:
+                print('Priorizado')
+            else:
+                print("Nao priorizado")
+
             print(projeto.nota)
 
 

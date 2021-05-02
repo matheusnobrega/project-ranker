@@ -2,6 +2,16 @@ from tkinter import *
 from Periodo import Periodo
 from Projeto import Projeto
 from Unidade import Unidade
+from UI.UiProjeto import UiProjeto
+
+#def on_click():
+#    print(ed.get())
+#    lb["text"] = ed.get()
+
+janela = Tk()
+
+ui = UiProjeto(janela)
+janela.mainloop()
 
 unidade = Unidade('Segec', 'Setor de gremiações concorrentes', 'gremiações', 54)
 

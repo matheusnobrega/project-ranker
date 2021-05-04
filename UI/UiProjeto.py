@@ -1,111 +1,118 @@
 from tkinter import *
 from Projeto import Projeto
+import os
 
 class UiProjeto:
     def __init__(self, janela):
         self.janela = janela
-        self.janela.geometry("300x300+100+100")
+        self.janela.geometry("800x300+100+100")
 
         self.frame_tela_inicial = Frame(janela)
         self.frame_tela_inicial.pack()
 
-        self.ed = Entry(self.frame_tela_inicial)
-        self.ed.pack(side=LEFT)
-
-        self.bt = Button(self.frame_tela_inicial, width=20, text='ola', command=self.cria_projeto)
+        self.projeto_imagem = PhotoImage(file='C:\spiral-html\imagem_projeto.png')
+        self.bt = Button(self.frame_tela_inicial, image=self.projeto_imagem, command=self.cria_projeto)
         self.bt.pack(side=LEFT)
 
-        self.lb = Label(self.frame_tela_inicial, text="Label")
-        self.lb.pack(side=LEFT)
+        self.projeto_unidade = PhotoImage(file='C:\spiral-html\imagem_unidade.png')
+        self.bt = Button(self.frame_tela_inicial, image=self.projeto_unidade, command=self.cria_projeto)
+        self.bt.pack(side=LEFT)
 
-       # self.bt.destroy()
+        self.projeto_busca = PhotoImage(file='C:\spiral-html\imagem_busca.png')
+        self.bt = Button(self.frame_tela_inicial, image=self.projeto_busca, command=self.cria_projeto)
+        self.bt.pack(side=LEFT)
 
 
     def cria_projeto(self):
         nova_janela = Toplevel(self.janela)
-        nova_janela.geometry("300x300+100+100")
+        nova_janela.geometry("600x300+100+100")
         janela_cadastro = Frame(nova_janela)
-        janela_cadastro.pack()
+        janela_cadastro.grid()
+
+        self.opcoes = {
+            "Muito baixa(o)":1,
+            "Baixa(o)":2,
+            "Média(o)":3,
+            "Alta(o)":4,
+            "Muito alta(o)":5
+        }
 
         label_nome_projeto = Label(janela_cadastro, text="Nome do projeto")
-        label_nome_projeto.pack(side=TOP)
+        label_nome_projeto.grid(row=1, column=1)
         self.nome_projeto = Entry(janela_cadastro)
-        self.nome_projeto.pack(side=TOP)
+        self.nome_projeto.grid(row=1, column=2)
 
         label_descricao_projeto = Label(janela_cadastro, text="Descrição do projeto")
-        label_descricao_projeto.pack(side=TOP)
+        label_descricao_projeto.grid(row=2, column=1)
         self.descricao_projeto = Entry(janela_cadastro)
-        self.descricao_projeto.pack(side=TOP)
+        self.descricao_projeto.grid(row=2, column=2)
 
         label_data_inicio = Label(janela_cadastro, text="Data de Início do projeto")
-        label_data_inicio.pack(side=TOP)
+        label_data_inicio.grid(row=3, column=1)
         self.data_inicio = Entry(janela_cadastro)
-        self.data_inicio.pack(side=TOP)
+        self.data_inicio.grid(row=3, column=2)
 
         label_data_termino = Label(janela_cadastro, text="Data de Término do projeto")
-        label_data_termino.pack(side=TOP)
+        label_data_termino.grid(row=4, column=1)
         self.data_termino = Entry(janela_cadastro)
-        self.data_termino.pack(side=TOP)
+        self.data_termino.grid(row=4, column=2)
 
         label_qtd_pessoas_alocadas = Label(janela_cadastro, text="Quantidade de pessoas alocadas")
-        label_qtd_pessoas_alocadas.pack(side=TOP)
+        label_qtd_pessoas_alocadas.grid(row=5, column=1)
         self.qtd_pessoas_alocadas = Entry(janela_cadastro)
-        self.qtd_pessoas_alocadas.pack(side=TOP)
+        self.qtd_pessoas_alocadas.grid(row=5, column=2)
 
         label_criterio_impacto = Label(janela_cadastro, text="Qual é o grau do impacto que o projeto retornará?")
-        label_criterio_impacto.pack(side=TOP)
-        self.criterio_impacto = Listbox(janela_cadastro)
-        self.criterio_impacto.insert(1, "Muito baixa")
-        self.criterio_impacto.insert(2, "Baixa")
-        self.criterio_impacto.insert(3, "Média")
-        self.criterio_impacto.insert(4, "Alta")
-        self.criterio_impacto.insert(5, "Muito alta")
-        self.criterio_impacto.pack(side=LEFT)
+        label_criterio_impacto.grid(row=6, column=1)
+        self.var_criterio_impacto = StringVar(janela_cadastro)
+        self.criterio_impacto = OptionMenu(janela_cadastro, self.var_criterio_impacto, *self.opcoes.keys())
+        self.criterio_impacto.grid(row=6, column=2)
 
         label_criterio_valor = Label(janela_cadastro, text="Qual é o grau do valor que o projeto retornará?")
-        label_criterio_valor.pack(side=TOP)
-        self.criterio_valor = Listbox(janela_cadastro)
-        self.criterio_valor.insert(1, "Muito baixa")
-        self.criterio_valor.insert(2, "Baixa")
-        self.criterio_valor.insert(3, "Média")
-        self.criterio_valor.insert(4, "Alta")
-        self.criterio_valor.insert(5, "Muito alta")
-        self.criterio_valor.pack(side=LEFT)
+        label_criterio_valor.grid(row=7, column=1)
+        self.var_criterio_valor = StringVar(janela_cadastro)
+        self.criterio_valor = OptionMenu(janela_cadastro, self.var_criterio_valor, *self.opcoes.keys())
+        self.criterio_valor.grid(row=7, column=2)
 
         label_criterio_custo = Label(janela_cadastro, text="Qual é o custo do projeto?")
-        label_criterio_custo.pack(side=TOP)
-        self.criterio_custo = Listbox(janela_cadastro)
-        self.criterio_custo.insert(1, "Muito baixa")
-        self.criterio_custo.insert(2, "Baixa")
-        self.criterio_custo.insert(3, "Média")
-        self.criterio_custo.insert(4, "Alta")
-        self.criterio_custo.insert(5, "Muito alta")
-        self.criterio_custo.pack(side=LEFT)
+        label_criterio_custo.grid(row=8, column=1)
+        self.var_criterio_custo = StringVar(janela_cadastro)
+        self.criterio_custo = OptionMenu(janela_cadastro, self.var_criterio_custo, *self.opcoes.keys())
+        self.criterio_custo.grid(row=8, column=2)
 
         label_criterio_esforco = Label(janela_cadastro, text="Qual é o grau do esforço que o projeto requisita?")
-        label_criterio_esforco.pack(side=TOP)
-        self.criterio_esforco = Listbox(janela_cadastro)
-        self.criterio_esforco.insert(1, "Muito baixa")
-        self.criterio_esforco.insert(2, "Baixa")
-        self.criterio_esforco.insert(3, "Média")
-        self.criterio_esforco.insert(4, "Alta")
-        self.criterio_esforco.insert(5, "Muito alta")
-        self.criterio_esforco.pack(side=LEFT)
+        label_criterio_esforco.grid(row=9, column=1)
+        self.var_criterio_esforco = StringVar(janela_cadastro)
+        self.criterio_esforco = OptionMenu(janela_cadastro, self.var_criterio_esforco, *self.opcoes.keys())
+        self.criterio_esforco.grid(row=9, column=2)
 
         label_situacao = Label(janela_cadastro, text="Situação")
-        label_situacao.pack(side=TOP)
-        self.situacao = Label(janela_cadastro, text="Aguardando situação")
-        self.situacao.pack(side=LEFT)
+        label_situacao.grid(row=10, column=1)
+        self.situacao = Label(janela_cadastro, text="Aguardando priorização")
+        self.situacao.grid(row=10, column=2)
 
         salva_projeto = Button(janela_cadastro, text="Salvar", command=self.salva_projeto_botao)
-        salva_projeto.pack(side=TOP)
+        salva_projeto.grid(row=11, column=1)
 
     def salva_projeto_botao(self):
         print(self.nome_projeto.get())
         print(self.descricao_projeto.get())
         print(self.data_inicio.get())
         print(self.data_termino.get())
-        #print(self.criterio_impacto.get())
+        print(self.opcoes[self.var_criterio_esforco.get()])
+
+        projeto = Projeto(self.nome_projeto.get(),
+                          self.descricao_projeto.get(),
+                          'Segec', # trocar para objeto de unidade
+                          self.qtd_pessoas_alocadas.get(),
+                          self.data_inicio.get(),
+                          self.data_termino.get(),
+                          self.opcoes[self.var_criterio_impacto.get()],
+                          self.opcoes[self.var_criterio_valor.get()],
+                          self.opcoes[self.var_criterio_custo.get()],
+                          self.opcoes[self.var_criterio_esforco.get()])
+
+        projeto.calcula_nota()
 
 
 

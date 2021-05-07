@@ -8,20 +8,22 @@ class UiProjeto:
         self.janela.geometry("800x300+100+100")
 
         self.frame_tela_inicial = Frame(janela)
-        self.frame_tela_inicial.pack()
+        self.frame_tela_inicial.grid()
 
         self.projeto_imagem = PhotoImage(file='C:\spiral-html\imagem_projeto.png')
-        self.bt = Button(self.frame_tela_inicial, image=self.projeto_imagem, command=self.cria_projeto)
-        self.bt.pack(side=LEFT)
+        self.botao_projeto = Button(self.frame_tela_inicial, image=self.projeto_imagem, command=self.cria_projeto)
+        self.botao_projeto.grid(row=1, column=1)
 
         self.projeto_unidade = PhotoImage(file='C:\spiral-html\imagem_unidade.png')
-        self.bt = Button(self.frame_tela_inicial, image=self.projeto_unidade, command=self.cria_projeto)
-        self.bt.pack(side=LEFT)
+        self.botao_unidade = Button(self.frame_tela_inicial, image=self.projeto_unidade, command=self.cria_projeto)
+        self.botao_unidade.grid(row=1, column=2)
 
         self.projeto_busca = PhotoImage(file='C:\spiral-html\imagem_busca.png')
-        self.bt = Button(self.frame_tela_inicial, image=self.projeto_busca, command=self.cria_projeto)
-        self.bt.pack(side=LEFT)
+        self.botao_busca = Button(self.frame_tela_inicial, image=self.projeto_busca, command=self.cria_projeto)
+        self.botao_busca.grid(row=1, column=3)
 
+        cabecalho = Label(self.frame_tela_inicial, text="Project Ranker")
+        cabecalho.grid(row=2, column=1)
 
     def cria_projeto(self):
         nova_janela = Toplevel(self.janela)
@@ -101,18 +103,20 @@ class UiProjeto:
         print(self.data_termino.get())
         print(self.opcoes[self.var_criterio_esforco.get()])
 
-        projeto = Projeto(self.nome_projeto.get(),
-                          self.descricao_projeto.get(),
-                          'Segec', # trocar para objeto de unidade
-                          self.qtd_pessoas_alocadas.get(),
-                          self.data_inicio.get(),
-                          self.data_termino.get(),
-                          self.opcoes[self.var_criterio_impacto.get()],
-                          self.opcoes[self.var_criterio_valor.get()],
-                          self.opcoes[self.var_criterio_custo.get()],
-                          self.opcoes[self.var_criterio_esforco.get()])
+        projeto = Projeto
+        projeto.salva_projeto(self.nome_projeto.get(),
+                            self.descricao_projeto.get(),
+                            'Segec', # trocar para objeto de unidade
+                            self.qtd_pessoas_alocadas.get(),
+                            self.data_inicio.get(),
+                            self.data_termino.get(),
+                            self.opcoes[self.var_criterio_impacto.get()],
+                            self.opcoes[self.var_criterio_valor.get()],
+                            self.opcoes[self.var_criterio_custo.get()],
+                            self.opcoes[self.var_criterio_esforco.get()]
+                            )
 
-        projeto.calcula_nota()
+ #       projeto.calcula_nota()
 
 
 

@@ -1,21 +1,28 @@
+from DTO.ProjetoDTO import ProjetoDTO
+from DAO.ProjetoDAO import ProjetoDAO
+
 class Projeto:
 
     projetos = []
-    def __init__(self, nome, descricao, unidade_responsavel, data_inicio,
-                 data_termino, qtd_pessoas_alocadas, criterio_impacto, criterio_valor,
-                 criterio_custo, criterio_esforco):
-        self.nome = nome
-        self.descricao = descricao
-        self.unidade_responsavel = unidade_responsavel
-        self.data_inicio = data_inicio
-        self.data_termino = data_termino
-        self.qtd_pessoas_alocadas = qtd_pessoas_alocadas
-        self.criterio_impacto = criterio_impacto
-        self.criterio_valor = criterio_valor
-        self.criterio_custo = criterio_custo
-        self.criterio_esforco = criterio_esforco
-        self.situacao = 'Aguardando priorização'
-        self.__class__.projetos.append(self)
+    def salva_projeto(nome, descricao, unidade_responsavel, data_inicio,
+                    data_termino, qtd_pessoas_alocadas, criterio_impacto, criterio_valor,
+                    criterio_custo, criterio_esforco):
+        projeto_dto = ProjetoDTO
+        projeto_dto.nome = nome
+        projeto_dto.descricao = descricao
+        projeto_dto.unidade_responsavel = unidade_responsavel
+        projeto_dto.data_inicio = data_inicio
+        projeto_dto.data_termino = data_termino
+        projeto_dto.qtd_pessoas_alocadas = qtd_pessoas_alocadas
+        projeto_dto.criterio_impacto = criterio_impacto
+        projeto_dto.criterio_valor = criterio_valor
+        projeto_dto.criterio_custo = criterio_custo
+        projeto_dto.criterio_esforco = criterio_esforco
+        projeto_dto.situacao = 'Aguardando priorização'
+#        self.__class__.projetos.append(self)
+
+        projeto_dao = ProjetoDAO()
+        projeto_dao.salva_projeto(projeto_dto)
 
     def __str__(self):
         return f'O projeto {self.nome} tem inicio no dia {self.data_inicio} ' \

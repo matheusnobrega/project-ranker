@@ -25,4 +25,17 @@ class ProjetoDAO:
 
         database.commit()
         database.close()
+
+    @classmethod
+    def busca_projeto(cls):
+        db = sqlite3.connect('C:\spiral-html\ProjectRankerDB.db')
+
+        cursor = db.cursor()
+
+        cursor.execute("SELECT *, oid FROM projeto")
+        query = cursor.fetchall()
+
+        return query
+
+
         

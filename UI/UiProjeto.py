@@ -1,5 +1,6 @@
 from tkinter import *
 from Projeto import Projeto
+from DAO.ProjetoDAO import ProjetoDAO
 import os
 
 class UiProjeto:
@@ -19,7 +20,7 @@ class UiProjeto:
         self.botao_unidade.grid(row=1, column=2)
 
         self.projeto_busca = PhotoImage(file='C:\spiral-html\imagem_busca.png')
-        self.botao_busca = Button(self.frame_tela_inicial, image=self.projeto_busca, command=self.cria_projeto)
+        self.botao_busca = Button(self.frame_tela_inicial, image=self.projeto_busca, command=self.busca_projeto)
         self.botao_busca.grid(row=1, column=3)
 
         cabecalho = Label(self.frame_tela_inicial, text="Project Ranker")
@@ -117,6 +118,34 @@ class UiProjeto:
                             )
 
  #       projeto.calcula_nota()
+
+    def busca_projeto(self):
+        nova_janela = Toplevel(self.janela)
+        nova_janela.geometry("1000x300+100+100")
+        janela_cadastro = Frame(nova_janela)
+        janela_cadastro.grid()
+
+        projeto_dao = ProjetoDAO
+        projetos = projeto_dao.busca_projeto()
+        print(projetos)
+
+        projeto_display = ''
+        for projeto in projetos:
+            projeto_display += str(projeto[-1]) + ' ' + str(projeto[0]) + '\n'
+
+#        self.label_busca_projeto = Label(janela_cadastro, text=projeto_display)
+#        self.label_busca_projeto.grid(row=1, column=1, columnspan=2)
+
+        numero_linhas = len(projetos)
+        numero_colunas = len(projetos[0])
+
+        for i in range(numero_linhas):
+            for j in range(numero_colunas):
+                self.e = Entry(janela_cadastro, width=20, fg='black',
+                               font=('Arial', 6, 'bold'))
+
+                self.e.grid(row=i, column=j)
+                self.e.insert(END, projetos[i][j])
 
 
 

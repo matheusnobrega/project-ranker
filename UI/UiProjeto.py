@@ -131,7 +131,7 @@ class UiProjeto:
 
         projeto_display = ''
         for projeto in projetos:
-            projeto_display += str(projeto[-1]) + ' ' + str(projeto[0]) + '\n'
+            projeto_display += str(projeto[0]) + ' ' + str(projeto[-1]) + '\n'
 
 #        self.label_busca_projeto = Label(janela_cadastro, text=projeto_display)
 #        self.label_busca_projeto.grid(row=1, column=1, columnspan=2)

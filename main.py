@@ -6,12 +6,6 @@ from DAO.ProjetoDAO import ProjetoDAO
 from UI.UiProjeto import UiProjeto
 
 
-#def on_click():
-#    print(ed.get())
-#    lb["text"] = ed.get()
-
-
-
 janela = Tk()
 
 ui = UiProjeto(janela)

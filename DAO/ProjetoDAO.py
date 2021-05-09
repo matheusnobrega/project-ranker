@@ -7,7 +7,7 @@ class ProjetoDAO:
         cursor = database.cursor()
 
         cursor.execute("""
-                        INSERT INTO projeto VALUES (?,?,?,?,?,?,?,?,?,?)
+                        INSERT INTO projeto VALUES (?,?,?,?,?,?,?,?,?,?,?)
                         """, (  projeto.nome,
                                 projeto.descricao,
                                 projeto.data_inicio,
@@ -17,11 +17,9 @@ class ProjetoDAO:
                                 projeto.criterio_valor,
                                 projeto.criterio_custo,
                                 projeto.criterio_esforco,
-                                projeto.situacao)
+                                projeto.situacao,
+                                projeto.nota)
                        )
-
-        cursor.execute("SELECT *, oid FROM projeto")
-        print(cursor.fetchall())
 
         database.commit()
         database.close()
@@ -32,7 +30,12 @@ class ProjetoDAO:
 
         cursor = db.cursor()
 
-        cursor.execute("SELECT *, oid FROM projeto")
+        cursor.execute("""SELECT oid, 
+                                 nome, 
+                                 data_inicio, 
+                                 data_termino,
+                                 IFNULL(nota, 0) nota
+                          FROM   projeto""")
         query = cursor.fetchall()
 
         return query

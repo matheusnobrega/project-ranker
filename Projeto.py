@@ -19,6 +19,8 @@ class Projeto:
         projeto_dto.criterio_custo = criterio_custo
         projeto_dto.criterio_esforco = criterio_esforco
         projeto_dto.situacao = 'Aguardando priorização'
+        projeto_dto.nota = (criterio_esforco + criterio_impacto +
+                            criterio_valor + criterio_custo)*100/20
 #        self.__class__.projetos.append(self)
 
         projeto_dao = ProjetoDAO()
@@ -40,13 +42,9 @@ class Projeto:
 
 
     def calcula_nota(self):
-        nota = (self.criterio_custo + self.criterio_valor + \
+        self.nota = (self.criterio_custo + self.criterio_valor + \
                self.criterio_esforco + self.criterio_impacto)*100/20
-        self.nota = nota
-        #print(nota)
 
-#    def gera_ranking(self):
-#        print(self.unidade_responsavel.qtd_pessoas_alocadas)
 
     @classmethod
     def gera_ranking(cls):

@@ -1,5 +1,6 @@
 from tkinter import *
 from Projeto import Projeto
+from Periodo import Periodo
 from DAO.ProjetoDAO import ProjetoDAO
 import os
 
@@ -16,7 +17,7 @@ class UiProjeto:
         self.botao_projeto.grid(row=1, column=1)
 
         self.projeto_unidade = PhotoImage(file='C:\spiral-html\imagem_unidade.png')
-        self.botao_unidade = Button(self.frame_tela_inicial, image=self.projeto_unidade, command=self.cria_projeto)
+        self.botao_unidade = Button(self.frame_tela_inicial, image=self.projeto_unidade, command=self.cria_periodo)
         self.botao_unidade.grid(row=1, column=2)
 
         self.projeto_busca = PhotoImage(file='C:\spiral-html\imagem_busca.png')
@@ -148,6 +149,50 @@ class UiProjeto:
                 self.e.insert(END, projetos[i][j])
 
 
+
+    # Mudar para arquivo próprio
+    ##################################################################################
+    def cria_periodo(self):
+        nova_janela = Toplevel(self.janela)
+        nova_janela.geometry("600x300+100+100")
+        janela_cadastro = Frame(nova_janela)
+        janela_cadastro.grid()
+
+        label_nome_periodo = Label(janela_cadastro, text="Sigla da unidade")
+        label_nome_periodo.grid(row=1, column=1)
+        self.nome_periodo = Entry(janela_cadastro)
+        self.nome_periodo.grid(row=1, column=2)
+
+        label_data_inicio = Label(janela_cadastro, text="Sigla da unidade")
+        label_data_inicio.grid(row=2, column=1)
+        self.data_inicio_periodo = Entry(janela_cadastro)
+        self.data_inicio_periodo.grid(row=2, column=2)
+
+        label_data_termino = Label(janela_cadastro, text="Sigla da unidade")
+        label_data_termino.grid(row=3, column=1)
+        self.data_termino_periodo = Entry(janela_cadastro)
+        self.data_termino_periodo.grid(row=3, column=2)
+
+        label_orcamento = Label(janela_cadastro, text="Sigla da unidade")
+        label_orcamento.grid(row=4, column=1)
+        self.orcamento = Entry(janela_cadastro)
+        self.orcamento.grid(row=4, column=2)
+
+        salva_periodo = Button(janela_cadastro, text="Salvar", command=self.salva_periodo_botao)
+        salva_periodo.grid(row=5, column=1)
+
+    def salva_periodo_botao(self):
+        print(self.nome_periodo.get())
+        print(self.data_inicio_periodo.get())
+        print(self.data_termino_periodo.get())
+        print(self.orcamento.get())
+
+        periodo = Periodo
+        periodo.salva_periodo(self.nome_periodo.get(),
+                              self.data_inicio_periodo.get(),
+                              self.data_termino_periodo.get(),
+                              self.orcamento.get()
+                              )
 
 
 

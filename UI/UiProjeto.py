@@ -158,22 +158,22 @@ class UiProjeto:
         janela_cadastro = Frame(nova_janela)
         janela_cadastro.grid()
 
-        label_nome_periodo = Label(janela_cadastro, text="Sigla da unidade")
+        label_nome_periodo = Label(janela_cadastro, text="Nome do Período")
         label_nome_periodo.grid(row=1, column=1)
         self.nome_periodo = Entry(janela_cadastro)
         self.nome_periodo.grid(row=1, column=2)
 
-        label_data_inicio = Label(janela_cadastro, text="Sigla da unidade")
+        label_data_inicio = Label(janela_cadastro, text="Data de inicio")
         label_data_inicio.grid(row=2, column=1)
         self.data_inicio_periodo = Entry(janela_cadastro)
         self.data_inicio_periodo.grid(row=2, column=2)
 
-        label_data_termino = Label(janela_cadastro, text="Sigla da unidade")
+        label_data_termino = Label(janela_cadastro, text="Data de termino")
         label_data_termino.grid(row=3, column=1)
         self.data_termino_periodo = Entry(janela_cadastro)
         self.data_termino_periodo.grid(row=3, column=2)
 
-        label_orcamento = Label(janela_cadastro, text="Sigla da unidade")
+        label_orcamento = Label(janela_cadastro, text="Orcamento")
         label_orcamento.grid(row=4, column=1)
         self.orcamento = Entry(janela_cadastro)
         self.orcamento.grid(row=4, column=2)

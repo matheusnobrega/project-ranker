@@ -2,6 +2,8 @@ import sqlite3
 from Database.Database import Database
 
 class ProjetoDAO:
+
+
     def salva_projeto(self, projeto):
         database = sqlite3.connect('C:\spiral-html\ProjectRankerDB.db')
         cursor = database.cursor()
